@@ -1,0 +1,27 @@
+desc "Ejecutar pruebas"
+task :test do
+   sh "clear"
+   puts "Corriendo pruebas"
+   sh %{ruby test/html_test.rb}
+end
+
+desc "Crear tar.gz con todos los ficheros"
+task :dist do
+   sh "clear"
+   puts "Creando tar.gz con todos los ficheros"
+   sh %{tar -cf HTML_DSL.tar lib test rakefile README}
+end
+
+desc "Crear zip con todos los ficheros"
+task :zip do
+   sh "clear"
+   puts "Creando zip con todos los ficheros"
+   sh %{zip -r HTML_DSL.zip ./lib ./test rakefile README}
+end
+
+desc "Eliminar ficheros temporales"
+task :clean do
+   sh "clear"
+   puts "Eliminando ficheros temporales"
+   sh %{rm HTML_DSL.*}
+end
