@@ -1,8 +1,15 @@
+require 'rake/testtask'
+
 desc "Ejecutar pruebas"
-task :test do
-   sh "clear"
-   puts "Corriendo pruebas"
-   sh %{ruby test/html_test.rb}
+Rake::TestTask.new do |t|
+   t.libs << "test"
+   t.pattern = 'test/tc*.rb'
+   t.verbose = true
+end
+
+desc "Crear documentacion"
+task :doc do
+   sh "rdoc lib" 
 end
 
 desc "Crear tar.gz con todos los ficheros"
@@ -24,4 +31,5 @@ task :clean do
    sh "clear"
    puts "Eliminando ficheros temporales"
    sh %{rm HTML_DSL.*}
+   sh %{rm -rf doc}
 end
