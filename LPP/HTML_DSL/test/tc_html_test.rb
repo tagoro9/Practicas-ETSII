@@ -9,7 +9,7 @@ class TestHtml < Test::Unit::TestCase
    end
 
    def test_standard_page
-      test_page = HTML.new {  
+      test_page = Html.new {  
          html {
             head(:dir => "chazam", :lang => "spanish") { title "My wonderful home page" }
             body do
