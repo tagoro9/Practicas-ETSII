@@ -30,6 +30,7 @@ desc "Eliminar ficheros temporales"
 task :clean do
    sh "clear"
    puts "Eliminando ficheros temporales"
-   sh %{rm HTML_DSL.*}
-   sh %{rm -rf doc}
+   sh %{touch HTML_DSL.zip && rm HTML_DSL.zip}
+   sh %{touch HTML_DSL.tar && rm HTML_DSL.tar}
+   sh %{touch doc && rm -rf doc}
 end

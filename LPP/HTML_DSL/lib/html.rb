@@ -33,6 +33,7 @@
 * The <tt>page</tt> attribute contains an array with the paragraphs
   of the <tt>HTML</tt> page
 =end rdoc
+
 class Html
 
    attr_accessor :p
