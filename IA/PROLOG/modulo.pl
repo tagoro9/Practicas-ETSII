@@ -5,9 +5,8 @@ modulo(X,X,0).
 modulo(M,N,X) :-
    N > 0,
    M > N,
-   A is truncate(M/ N),
-   B is N*A,
-   X is M - B.
+   A is M-N,
+   modulo(A,N,X).
 
 modulo(M,N,X) :-
    M < N,
