@@ -106,7 +106,7 @@ down( A/0/C/D/E/F/H/I/J , A/E/C/D/0/F/H/I/J ).
 down( A/B/0/D/E/F/H/I/J , A/B/F/D/E/0/H/I/J ).
 
    %%% the heuristic function
-h_function(Puzz,H) :- p_fcn(Puzz,H).
+h_function(Puzz,H) :- p_fcn(Puzz,P).
 
    
    %%% the move
