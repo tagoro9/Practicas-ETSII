@@ -24,6 +24,4 @@ int main(int argc, char *argv[]) {
    Vector cifrado = prueba.cifrar(mensaje);
    cout << "Salida: ";
    prueba.imprimir(cifrado);
-   int a;
-   cin >> a;
 }
