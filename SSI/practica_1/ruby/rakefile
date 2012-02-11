@@ -1,0 +1,15 @@
+require 'rake/testtask'
+
+desc "Ejecutar pruebas"
+Rake::TestTask.new do |t|
+   t.libs << "test"
+   t.pattern = 'test/tc*.rb'
+   t.verbose = true
+end
+
+desc "Ejecutar UI"
+task :ui do
+   sh "ruby lib/grc4.rb"   
+end
+
+task :default => :ui
