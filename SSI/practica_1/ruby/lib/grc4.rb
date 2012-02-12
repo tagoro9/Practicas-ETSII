@@ -6,7 +6,7 @@ class Rc4ui < Gtk::Window
     super
     @rc4 = Rc4.new "2 5"
     #Titulo de la aplicacion
-    set_title "Algortimo RC4"
+    set_title "Algoritmo Rc4"
     set_icon Gdk::Pixbuf.new("image/logo.png")
     #Terminar aplicacion al cerrar ventana
     signal_connect "destroy" do
@@ -43,7 +43,7 @@ class Rc4ui < Gtk::Window
     end
     #Introducir botones en el fixed
     fixed.put btn_cifrar, 100, 140
-    fixed.put btn_about, 170, 140
+    fixed.put btn_about, 164, 140
     fixed.put btn_salir, 290, 140
     #Introducir etiquetas de los campos de texto
     lbl_seed = Gtk::Label.new "Semilla"
@@ -71,11 +71,9 @@ class Rc4ui < Gtk::Window
   
   def on_about_clicked
     about = Gtk::AboutDialog.new
-    about.set_program_name "Algotirmo rc4"
+    about.set_program_name "Algotirmo Rc4"
     about.set_version "0.1"
     about.set_copyright "(c) Victor Mora"
-    about.set_comments "Simple aplicacion que implementa el algoritmo rc4"
-    about.set_website "http://www.twitter.com/vivictormora"
     about.run
     about.destroy
   end
