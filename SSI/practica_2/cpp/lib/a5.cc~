@@ -137,7 +137,6 @@ int A5::shiftR3(int majority) {
 void A5::code(string message) {
    cout << "Code" << endl;
    cout << "Mayoria: " << majority() << endl;
-   //Meter en un bucle en funcion de la longitud del mensaje y listo
    int mjrty = majority();
    cout << shiftR1(mjrty) << endl;
    cout << shiftR2(mjrty) << endl;

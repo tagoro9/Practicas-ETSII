@@ -15,9 +15,9 @@ private:
    int LFSR3;
    ///Convertir a binario
    string DecToBin(int number);
-   int shiftR1(int majorty);
-   int shiftR2(int majorty);
-   int shiftR3(int majorty);
+   shiftR1(int majorty);
+   shiftR2(int majorty);
+   shiftR3(int majorty);
 public:
    A5(int lfsr1, int lfsr2, int lfsr3);
    ~A5() {};

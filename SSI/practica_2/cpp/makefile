@@ -19,7 +19,7 @@ $(EXEC): $(OBJS)
 bin/main.o: $(MAIN) $(INCS)
 	$(CC) -o bin/main.o $(CFLAGS) $(CDEBUG) $(MAIN)
 #Clase a5
-bin/rc4.o: lib/a5.cc lib/a5.h
+bin/a5.o: lib/a5.cc lib/a5.h
 	$(CC) -o bin/a5.o $(CFLAGS) $(CDEBUG) lib/a5.cc
 #Limpiar
 clean:
