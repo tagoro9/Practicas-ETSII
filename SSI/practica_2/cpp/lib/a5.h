@@ -1,8 +1,13 @@
 #include <string>
 #include <iostream>
 #include <stdio.h>
+#include <sstream>
+#include <vector>
 
 using namespace std;
+
+//Estructura vector de la STL
+typedef vector <int> Vector;
 
 class A5 {
 private:
@@ -18,6 +23,10 @@ private:
    int shiftR1(int majorty);
    int shiftR2(int majorty);
    int shiftR3(int majorty);
+   //Convertir string de numeros en vector de enteros
+   Vector s_to_v(string s);
+    ///Mensaje
+    Vector message;
 public:
    A5(int lfsr1, int lfsr2, int lfsr3);
    ~A5() {};

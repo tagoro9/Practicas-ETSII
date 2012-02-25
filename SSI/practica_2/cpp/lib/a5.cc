@@ -22,6 +22,20 @@ string A5::DecToBin(int number) {
         return DecToBin(number / 2) + "1";
 }
 
+
+Vector A5::s_to_v(string s){
+	Vector aux;
+	stringstream ss;
+	ss << s << endl;
+	int number;
+	while (ss.peek() != '\n') {
+		ss >> number;
+		aux.push_back(number);
+	}
+	return aux;
+}
+
+
 //Funcion mayoria
 int A5::majority() {
    //cout << "Mayoria" << endl;
@@ -41,7 +55,7 @@ int A5::majority() {
    //cout << DecToBin(LFSR2) << endl;
    //cout << "Enmascarado: " << DecToBin(b11R2) << endl;
    b11R2 = b11R2 >> 10;
-   cout << b11R2 << endl;
+   //cout << b11R2 << endl;
    //R3 bit 11
    int maskR3 = 1024;
    int b11R3 = LFSR3 & maskR3;
@@ -60,27 +74,27 @@ int A5::shiftR1(int majority) {
    int b17 = (m17 & LFSR1) >> 16;
    int b18 = (m18 & LFSR1) >> 17;
    int b19 = (m19 & LFSR1) >> 18;
-   cout << "b14: " << b14 << " b17: " << b17 << " b18: " << b18 << " b19: " << b19 << endl;
+   //cout << "b14: " << b14 << " b17: " << b17 << " b18: " << b18 << " b19: " << b19 << endl;
    int seq = b14 ^ b17 ^ b18 ^ b19;
    //¿Hay que desplazar?
    int m9 = 256;
    int b9 = (m9 & LFSR1) >> 8;
    if (majority == b9) {
-      cout << "Desplazamos" << endl;
+      //cout << "Desplazamos" << endl;
       //Meter seq como primer bit
       //Desplazar
-      cout << LFSR1 << endl;
+      //cout << LFSR1 << endl;
       LFSR1 = LFSR1 << 1;
       //Hay que ver si es necesario quitar el ultimo bit al hacer el desplazamineto (en principio no creo)
-      cout << LFSR1 << endl;
+      //cout << LFSR1 << endl;
       if (seq != 0) {
          int md(0x00000001);
          LFSR1 = md | LFSR1;
       }
    }
-   cout << "Seq: " << seq << endl;
-   cout << "R1: " << DecToBin(LFSR1) << endl;
-   cout << "b19: " << b19 << endl;
+   //cout << "Seq: " << seq << endl;
+   //cout << "R1: " << DecToBin(LFSR1) << endl;
+   //cout << "b19: " << b19 << endl;
    return b19;
 }
 
@@ -89,22 +103,22 @@ int A5::shiftR2(int majority) {
    int m21(1048576), m22(2097152);
    int b21 = (LFSR2 & m21) >> 20;
    int b22 = (LFSR2 & m22) >> 21;
-   cout << "b21: " << b21 << " b22: " << b22 << endl;
+   //cout << "b21: " << b21 << " b22: " << b22 << endl;
    int seq = b21 ^ b22;
    //¿hay que desplazar?
    int m11 = 1024;
    int b11 = (m11 & LFSR2) >> 10;
    if (majority == b11) {
-      cout << "Desplazamos" << endl;
+      //cout << "Desplazamos" << endl;
       LFSR2 = LFSR2 << 1;
       if (seq != 0) {
          int md(0x00000001);
          LFSR2 = md | LFSR2;
       }
    }
-   cout << "Seq: " << seq << endl;
-   cout << "R1: " << DecToBin(LFSR2) << endl;
-   cout << "b22: " << b22 << endl;
+   //cout << "Seq: " << seq << endl;
+   //cout << "R1: " << DecToBin(LFSR2) << endl;
+   //cout << "b22: " << b22 << endl;
    return b22;
 }
 
@@ -115,35 +129,52 @@ int A5::shiftR3(int majority) {
    int b21 = (m21 & LFSR3) >> 20;
    int b22 = (m22 & LFSR3) >> 21;
    int b23 = (m23 & LFSR3) >> 22;
-   cout << "b8: " << b8 << " b21: " << b21 << " b22: " << b22 << " b23: " << b23 << endl;
+   //cout << "b8: " << b8 << " b21: " << b21 << " b22: " << b22 << " b23: " << b23 << endl;
    int seq = b8 ^ b21 ^ b22 ^ b23;
    int m11 = 1024;
    int b11 = (m11 & LFSR3) >> 10;
    //¿Hay que desplazar?
    if (majority == b11) {
-      cout << "Desplazamos" << endl;
+      //cout << "Desplazamos" << endl;
       LFSR3 = LFSR3 << 1;
       if (seq != 0) {
          int md(0x00000001);
          LFSR3 = md | LFSR3;
       }
    }
-   cout << "Seq: " << seq << endl;
-   cout << "R3: " << DecToBin(LFSR3) << endl;
-   cout << "b23: " << b23 << endl;
+   //cout << "Seq: " << seq << endl;
+   //cout << "R3: " << DecToBin(LFSR3) << endl;
+   //cout << "b23: " << b23 << endl;
    return b23;
 }
 
 void A5::code(string message) {
-   cout << "Code" << endl;
-   cout << "Mayoria: " << majority() << endl;
-   //Meter en un bucle en funcion de la longitud del mensaje y listo
-   int mjrty = majority();
-   cout << shiftR1(mjrty) << endl;
-   cout << shiftR2(mjrty) << endl;
-   cout << shiftR3(mjrty) << endl;
-
-
+   Vector in_message = s_to_v(message);
+   for (int k=0; k < in_message.size(); k++) {
+      //cout << "Code" << endl;
+      //cout << "Mayoria: " << majority() << endl;
+      //Meter en un bucle en funcion de la longitud del mensaje y listo
+      //La idea seria por cada byte del mensaje (es un string) obtener y acumular 8 bits de secuencia cifrante y hacer un xor con el mensaje
+      int byte_cifr = 0;
+      int bit_cifr = 0;
+      for (int i =0; i < 8;i++) {
+         int mjrty = majority();
+         //cout << shiftR1(mjrty) << endl;
+         //cout << shiftR2(mjrty) << endl;
+         //cout << shiftR3(mjrty) << endl;
+         bit_cifr = (shiftR1(mjrty) ^ shiftR2(mjrty) ^ shiftR3(mjrty));
+         cout << "***************** Bit de secuencia cifrante [" << i <<"]: " << bit_cifr << " ******************" << endl;
+         cout << "Byte cifrante: " << byte_cifr << endl;
+         byte_cifr = byte_cifr << 1;
+         if (bit_cifr != 0) {
+            int md(0x00000001);
+            byte_cifr = md | byte_cifr;
+         }
+      }
+      cout << "Mensaje[" << k << "]: " << in_message[k] << endl;
+      cout << "Byte cifrante: " << byte_cifr << endl;
+      cout << "Mensaje cifrado[" << k << "]: " << (in_message[k] ^ byte_cifr) << endl;
+   }
 }
 
 string A5::to_s() {
