@@ -1,14 +1,11 @@
-#g++ simple.cc -o simple `pkg-config gtkmm-3.0 --cflags --libs`
 # Ficheros con codigo fuente
 MAIN = main.cc
-INCS = lib/a5.h
-OBJS = bin/main.o bin/a5.o
+INCS = lib/skc/skc.h lib/skc/a5/a5.h lib/skc/rc4/rc4.h
+OBJS = bin/main.o bin/skc.o bin/a5.o bin/rc4.o
 EXEC = bin/main
-#LIBS = `pkg-config gtkmm-3.0 --cflags --libs`
 LIBS =
 # Compilador y opciones
 CC     = g++
-#CFLAGS = -c `pkg-config gtkmm-3.0 --cflags --libs`
 CFLAGS = -c
 CDEBUG = -g
 # Reglas
@@ -18,9 +15,15 @@ $(EXEC): $(OBJS)
 #Principal
 bin/main.o: $(MAIN) $(INCS)
 	$(CC) -o bin/main.o $(CFLAGS) $(CDEBUG) $(MAIN)
+#Clase skc
+bin/skc.o: lib/skc/skc.cc lib/skc/skc.h
+	$(CC) -o bin/skc.o $(CFLAGS) $(CDEBUG) lib/skc/skc.cc
 #Clase a5
-bin/a5.o: lib/a5.cc lib/a5.h
-	$(CC) -o bin/a5.o $(CFLAGS) $(CDEBUG) lib/a5.cc
+bin/a5.o: lib/skc/a5/a5.cc lib/skc/a5/a5.h 
+	$(CC) -o bin/a5.o $(CFLAGS) $(CDEBUG) lib/skc/a5/a5.cc
+#Clase rc4
+bin/rc4.o: lib/skc/rc4/rc4.cc lib/skc/rc4/rc4.h 
+	$(CC) -o bin/rc4.o $(CFLAGS) $(CDEBUG) lib/skc/rc4/rc4.cc
 #Limpiar
 clean:
 	rm -f $(OBJS) $(EXEC) core*.*
