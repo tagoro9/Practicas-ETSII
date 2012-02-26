@@ -21,6 +21,8 @@ public:
 	A5(int lfsr1, int lfsr2, int lfsr3);
 	~A5() {};
 	void code(string msg);
+    ///Modificar la semilla
+    void set_seed(string new_seed);
 };
 
 #endif /* A5_H_ */

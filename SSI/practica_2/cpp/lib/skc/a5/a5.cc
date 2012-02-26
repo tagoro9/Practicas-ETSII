@@ -105,3 +105,12 @@ void A5::code(string msg) {
    }
 }
 
+
+void A5::set_seed(string new_seed) {
+	stringstream ss;
+	ss << new_seed;
+	ss >> LFSR1;
+	ss >> LFSR2;
+	ss >> LFSR3;
+}
+

@@ -35,27 +35,29 @@ string Skc::int2hex(int number) {
 
 string Skc::to_s(const char MODE) {
 	stringstream ss;
-	switch (MODE) {
-		case BIN: {
-			for (int i = 0; i < _message.size() -1; i++) {
-				ss << int2bin(_message[i]) << " ";
+	if (_message.size() > 0) {
+		switch (MODE) {
+			case BIN: {
+				for (int i = 0; i < _message.size() -1; i++) {
+					ss << int2bin(_message[i]) << " ";
+				}
+				ss << int2bin(_message[_message.size() -1]);
+				break;
 			}
-			ss << int2bin(_message[_message.size() -1]);
-			break;
-		}
-		case HEX: {
-			for (int i = 0; i < _message.size() -1; i++) {
-				ss << int2hex(_message[i]) << " ";
+			case HEX: {
+				for (int i = 0; i < _message.size() -1; i++) {
+					ss << int2hex(_message[i]) << " ";
+				}
+				ss << int2hex(_message[_message.size() -1]);
+				break;
 			}
-			ss << int2hex(_message[_message.size() -1]);
-			break;
-		}
-		case DEC: {
-			for (int i = 0; i < _message.size() -1; i++) {
-				ss << _message[i] << " ";
+			case DEC: {
+				for (int i = 0; i < _message.size() -1; i++) {
+					ss << _message[i] << " ";
+				}
+				ss << _message[_message.size() -1];
+				break;
 			}
-			ss << _message[_message.size() -1];
-			break;
 		}
 	}
 	string msg = "";

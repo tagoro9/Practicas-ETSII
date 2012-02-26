@@ -25,6 +25,7 @@ private:
 public:
 	Skc() {};
 	virtual void code(string msg) {};
+	virtual void set_seed(string new_seed) {};
 	string to_s(const char MODE);
 };
 
