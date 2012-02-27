@@ -42,6 +42,10 @@ int A5::shiftR1(int majority) {
          int md(0x00000001);
          LFSR1 = md | LFSR1;
       }
+      //Si se desplazo poner resto de bits a 0
+      //19 bits
+      int md = 0x0007FFFF;
+      LFSR1 = md & LFSR1;
    }
    return b19;
 }
@@ -61,6 +65,10 @@ int A5::shiftR2(int majority) {
          int md(0x00000001);
          LFSR2 = md | LFSR2;
       }
+      //Si se desplazo poner resto de bits a 0
+      //22 bits
+      int md = 0x003FFFFF;
+      LFSR2 = md & LFSR2;
    }
    return b22;
 }
@@ -82,19 +90,38 @@ int A5::shiftR3(int majority) {
          int md(0x00000001);
          LFSR3 = md | LFSR3;
       }
+      //Si se desplazo poner resto de bits a 0
+      //23 bits
+      int md = 0x007FFFFF;
+      LFSR3 = md & LFSR3;
    }
    return b23;
 }
 
-void A5::code(string msg) {
+void A5::code(string msg, const char MODE) {
    Vector in_message = s_to_v(msg);
    _message.clear();
+   if (MODE == DEBUG) {
+ 	  cout << "/*      DEBUGGING     */" << endl;
+   }
    for (int k=0; k < in_message.size(); k++) {
       int byte_cifr = 0;
       int bit_cifr = 0;
+      if (MODE == DEBUG) {
+    	  cout << "****** Byte: " << k << " ******" << endl;
+      }
       for (int i =0; i < 8;i++) {
+         if (MODE == DEBUG) {
+        	 cout << "\tBit: " << i << endl;
+		 }
          int mjrty = majority();
          bit_cifr = (shiftR1(mjrty) ^ shiftR2(mjrty) ^ shiftR3(mjrty));
+         if (MODE == DEBUG) {
+        	 cout << "\tBit de secuencia cifrante: " << bit_cifr << endl;
+        	 cout << "\tR1: " << int2bin(LFSR1) << endl;
+        	 cout << "\tR2: " << int2bin(LFSR2) << endl;
+        	 cout << "\tR3: " << int2bin(LFSR3) << endl;
+         }
          byte_cifr = byte_cifr << 1;
          if (bit_cifr != 0) {
             int md(0x00000001);
@@ -102,6 +129,9 @@ void A5::code(string msg) {
          }
       }
       _message.push_back((in_message[k] ^ byte_cifr));
+   }
+   if (MODE == DEBUG) {
+ 	  cout << "/*      END     */" << endl;
    }
 }
 

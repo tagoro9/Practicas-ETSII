@@ -25,7 +25,7 @@ public:
     ///Modificar la semilla
     void set_seed(string new_seed);
     ///Cifrar
-    void code(string msg);
+    void code(string msg, const char MODE = STD);
 };
 
 #endif /* RC4_H_ */

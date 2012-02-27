@@ -1,31 +1,27 @@
 #include "gui.h"
 
-Gui::Gui(): btn_quit(Gtk::Stock::QUIT),
+Gui::Gui(char* path): btn_quit(Gtk::Stock::QUIT),
 			  lbl_seed("Semilla"),
 			  lbl_message("Mensaje"),
 			  lbl_result("Resultado"),
 			  lbl_algorithm("Seleccione algortimo"),
 			  m_a5("a5"),
-			  m_rc4("rc4")
+			  m_rc4("rc4"),
+			  b_debug("Debug"),
+			  _path(path)
 {
   // Sets the border width of the window.
   set_default_size(400,250);
   set_title("Cifrado de clave secreta- rc4");
   //set_window_position(Gtk::Window::POS_CENTER);
-  set_icon(Gdk::Pixbuf::create_from_file("image/logo.png"));
+  _path.erase(_path.length() -5, _path.length() -1);
+  cout << _path+"/../image/logo.png" << endl;
+  set_icon(Gdk::Pixbuf::create_from_file(_path+"/../image/logo.png"));
   set_position(Gtk::WIN_POS_CENTER);
   components();
   show_all_children();
   //Inicializar el skc
   skc = new Rc4("2 5");
-}
-
-void Gui::rc4_components() {
-
-}
-
-void Gui::a5_components() {
-
 }
 
 void Gui::components() {
@@ -34,6 +30,7 @@ void Gui::components() {
 	m_a5.set_group(group);
 	fixed.put(m_a5,135,40);
 	fixed.put(m_rc4,205,40);
+	fixed.put(b_debug,30,40);
 	fixed.put(lbl_algorithm,125,15);
 	m_rc4.set_active();
 	m_rc4.signal_clicked().connect(sigc::mem_fun(*this,&Gui::on_radio_clicked));
@@ -82,6 +79,15 @@ void Gui::components() {
 	add(fixed);
 }
 
+string Gui::get_working_path()
+{
+   char temp[100];
+   string aux;
+   getcwd(temp, 100) ? aux = string( temp ) : aux = string("");
+   //return aux + _path.substr(1,_path.length()-1);
+   return aux;
+}
+
 void Gui::on_btn_code_clicked()
 {
 	if (m_a5.get_active() == true) {
@@ -98,7 +104,10 @@ void Gui::on_btn_code_clicked()
 	}
 	btn_toggle.set_label("HEX");
 	std::cout << "Mensaje: " << in_message.get_text() << std::endl;
-	skc->code(in_message.get_text());
+	if (b_debug.get_active() == true)
+		skc->code(in_message.get_text(),DEBUG);
+	else
+		skc->code(in_message.get_text());
 	std::cout << "Salida: " << skc->to_s(DEC) << std::endl;
 	in_result.set_text(skc->to_s(DEC));
 }

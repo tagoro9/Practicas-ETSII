@@ -4,6 +4,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <unistd.h>
 #include "lib/gui/gui.h"
 
 using namespace std;
@@ -18,7 +19,7 @@ int main(int argc, char *argv[]) {
 
 	Gtk::Main kit(argc, argv);
 
-	Gui gui;
+	Gui gui(argv[0]);
 	//Shows the window and returns when it is closed.
 	Gtk::Main::run(gui);
 	return 0;

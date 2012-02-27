@@ -6,6 +6,7 @@
 #include <gtkmm/window.h>
 #include <gtkmm/stock.h>
 #include <gtkmm/main.h>
+#include <gtkmm/checkbutton.h>
 #include <gtkmm/label.h>
 #include <gtkmm/entry.h>
 #include <gdkmm/pixbuf.h>
@@ -17,12 +18,12 @@
 
 class Gui : public Gtk::Window {
 public:
-	Gui();
+	Gui(char* path);
 	~Gui() {};
 private:
 	void components();
-	void rc4_components();
-	void a5_components();
+	string _path;
+	string get_working_path();
 protected:
 	//Signal handlers:
 	void on_btn_code_clicked();
@@ -31,6 +32,8 @@ protected:
 	void on_radio_clicked();
 	//Radio button
 	Gtk::RadioButton m_rc4, m_a5;
+	//Check button para debugging
+	Gtk::CheckButton b_debug;
     //Skc
 	Skc *skc;
 	//Member widgets:

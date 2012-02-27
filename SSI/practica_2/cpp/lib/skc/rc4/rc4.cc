@@ -20,15 +20,25 @@ void Rc4::initialize_seed() {
 	}
 }
 
-void Rc4::code(string msg) {
+void Rc4::code(string msg, const char MODE) {
 	Vector in_message = s_to_v(msg);
 	_message.clear();
+    if (MODE == DEBUG) {
+    	cout << "/*      DEBUGGING     */" << endl;
+    }
 	for (int k(0),i(0),j(0);k < in_message.size();k++) {
 		i = (i + 1) % SIZE;
 		j = (j + S[i]);
 		swap(i,j);
+	    if (MODE == DEBUG) {
+	    	cout << "****** Byte: " << k << " ******" << endl;
+	    	cout << "Secuencia cifrante: " << S[(S[i] + S[j]) % SIZE] << endl;
+	    }
 		_message.push_back(in_message[k] ^ S[(S[i] + S[j]) % SIZE]);
 	}
+    if (MODE == DEBUG) {
+    	cout << "/*      END     */" << endl;
+    }
 }
 
 void Rc4::set_seed(string new_seed) {

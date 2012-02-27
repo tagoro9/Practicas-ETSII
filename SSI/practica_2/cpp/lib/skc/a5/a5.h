@@ -20,7 +20,7 @@ private:
 public:
 	A5(int lfsr1, int lfsr2, int lfsr3);
 	~A5() {};
-	void code(string msg);
+	void code(string msg, const char MODE = STD);
     ///Modificar la semilla
     void set_seed(string new_seed);
 };
