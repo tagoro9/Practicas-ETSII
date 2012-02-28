@@ -30,7 +30,7 @@ void Rc4::code(string msg, const char MODE) {
 	int j = 0;
 	for (int k = 0;k < in_message.size();k++) {
 		i = (i + 1) % SIZE;
-		j = (j + S[i]) % SIZE;
+		j = (j + S[i]);
 		swap(i,j);
 	    if (MODE == DEBUG) {
 	    	cout << "****** Byte: " << k << " ******" << endl;

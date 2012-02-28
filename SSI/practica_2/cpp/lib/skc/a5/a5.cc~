@@ -35,7 +35,6 @@ int A5::shiftR1(int majority) {
    int m9 = 256;
    int b9 = (m9 & LFSR1) >> 8;
    if (majority == b9) {
-      cout << "R1 se desplaza" << endl;
       //Meter seq como primer bit
       //Desplazar
       LFSR1 = LFSR1 << 1;
@@ -62,7 +61,6 @@ int A5::shiftR2(int majority) {
    int m11 = 1024;
    int b11 = (m11 & LFSR2) >> 10;
    if (majority == b11) {
-      cout << "R2 se desplaza" << endl;
       LFSR2 = LFSR2 << 1;
       if (seq != 0) {
          int md(0x00000001);
@@ -90,7 +88,6 @@ int A5::shiftR3(int majority) {
    int b11 = (m11 & LFSR3) >> 10;
    //¿Hay que desplazar?
    if (majority == b11) {
-      cout << "R3 se desplaza" << endl;
       LFSR3 = LFSR3 << 1;
       if (seq != 0) {
          int md(0x00000001);

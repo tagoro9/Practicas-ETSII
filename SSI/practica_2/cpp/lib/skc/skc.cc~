@@ -6,13 +6,13 @@
 
 Vector Skc::s_to_v(string s){
 	Vector aux;
-	//cout << "SS: " << s << endl;
+	cout << "SS: " << s << endl;
 	stringstream ss;
 	ss << s << endl;
 	int number;
 	while (ss.peek() != '\n') {
 		ss >> number;
-		//cout << "Number: " << number << endl;
+		cout << "Number: " << number << endl;
 		aux.push_back(number);
 	}
 	return aux;

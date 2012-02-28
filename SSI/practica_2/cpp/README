@@ -1,0 +1,32 @@
+***** Autor ******
+
+Victor Mora Afonso
+alu3966
+Seguridad en Sistemas Informáticos
+Febrero de 2012
+
+
+***** Nota importante: *****
+
+Para poder compilar la práctica es necesario tener instaladas las librerías
+GTKmm2.4 de desarrollo.
+
+Para porder ejecutar la practica es necesario tener instaladas las librerias
+Gtkmm2.4.
+
+Para compilar la práctica ejecutar el makefile.
+
+El ejecutable se encuentra en la carpeta bin y su nombre es main.
+
+****** Funcionamiento: ******
+
+1.- Seleccionar algoritmo.
+2.- Introducir numeros de la semilla separados por espacios.
+3.- Introducir valores del mensaje (numeros) separados por espacios.
+4.- Hacer click en cifrar. Es posible varias el formato de la salida entre
+HEX, DEC y BIN.
+
+****** Nota para el algoritmo A5. *******
+
+En el algoritmo a5 los valores de cada uno de los registros se han introducir
+en formato decimal
