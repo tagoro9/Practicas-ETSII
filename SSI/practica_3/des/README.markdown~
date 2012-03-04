@@ -4,8 +4,6 @@
 ###Asignatura: Seguridad en sistemas informáticos
 ###Marzo de 2012
 
-### + Uso de la aplicación
-
 Para poder compilar la práctica es necesario tener instaladas las librerías
  [boost](http://www.boost.org)
  
