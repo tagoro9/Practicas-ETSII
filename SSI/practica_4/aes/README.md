@@ -28,7 +28,7 @@ Se creará un ejecutable en la carpeta *bin* con el nombre *cli*. Al ejecutarlo,
     
 Un ejemplo de ejecución:
 
-    ./bin/cli "LALALALA" "MENSAJES" "e"
+    ./bin/cli "LALALALALALALALALALA" "MENSAJESMENSAJES" "e"
 
 * Versión gráfica
 
