@@ -24,11 +24,10 @@ Se creará un ejecutable en la carpeta *bin* con el nombre *cli*. Al ejecutarlo,
 
     * **Estándar:** s 
     * **Depuración:** d
-    * **Depuración extendida:** e
     
 Un ejemplo de ejecución:
 
-    ./bin/cli "LALALALALALALALALALA" "MENSAJESMENSAJES" "e"
+    ./bin/cli "LALALALALALALALALALA" "MENSAJESMENSAJES" "d"
 
 * Versión gráfica
 
