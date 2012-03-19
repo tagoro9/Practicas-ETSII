@@ -118,20 +118,14 @@ Bitset Sbox::run(const Bitset reg, const Bitset key, char MODE) {
 		column.push_back(subset.subset(1,4).to_ul());
 	}
 	//Obtener el vector de bitsets de 4 bits tras el paso por cajas S
-	//cout << "Imprimiendo subocnjuntos de 6 bits" << endl;
 	string result_s = "";
 	for (int i = 7; i >= 0; i--) {
-		//if (MODE == EXTENDED) cout << "Fila: " << row[i] << endl;
-		//if (MODE == EXTENDED) cout << "Columna: " << column[i] << endl;
-		//cout << "Valor lineal: " << row[i]*16 + column[i] << endl;
 		int val = S1_8[7-i][row[i]*16 + column[i]];
 		if (MODE == EXTENDED) cout << subsets[i] << " -> Caja_S"<< 7-i << "[" << row[i] << "," << column[i] << "]:" << val << endl;
 		//Se van guardando los valores en una cadena para luego crear el bitset
 		result_s.append(padZeros(int2bin(val),4));
-		//if (MODE == EXTENDED) cout << "Valor caja " << 7-i << ": " << val << endl;
 	}
 	Bitset v4bits(result_s);
-	//if (MODE == DEBUG) cout << "Salida caja S: " << v4bits << endl;
 	//Realizar permutacion final y devolver resultado
 	if (MODE == EXTENDED) cout << "\n\t***************************\n\n";
 	return Fpermf(v4bits);

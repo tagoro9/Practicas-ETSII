@@ -4,23 +4,20 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 CC_SRCS += \
-../main.cc \
-../main_cli.cc 
+../lib/bitset/bitset.cc 
 
 OBJS += \
-./main.o \
-./main_cli.o 
+./lib/bitset/bitset.o 
 
 CC_DEPS += \
-./main.d \
-./main_cli.d 
+./lib/bitset/bitset.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
-%.o: ../%.cc
+lib/bitset/%.o: ../lib/bitset/%.cc
 	@echo 'Building file: $<'
 	@echo 'Invoking: GCC C++ Compiler'
-	g++ -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
+	g++ -O3 -Wall -c -fmessage-length=0 -MMD -MP -MF"$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -o "$@" "$<"
 	@echo 'Finished building: $<'
 	@echo ' '
 

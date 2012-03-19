@@ -40,30 +40,28 @@ Keys::Keys(const Bitset key, char MODE) {
 	_key = key;
 	//Permutar y dividir en dos mitades
 	if (MODE != STD) cout << "\n\t***************************\n\n";
-	//if (MODE == DEBUG) cout << _key.size() << endl;
 	if (MODE != STD) cout << "Clave inicial: " << _key.to_s(BIN,8) << endl;
 	Bitset pc1key = PPC1();
 	if (MODE != STD) cout << "\nP1: " << pc1key.to_s(BIN,8) << endl;
 	//Dividir en dos mitades
 	Bitset L = pc1key.subset(28,28);
 	Bitset R = pc1key.subset(0,28);
-	//if (MODE == DEBUG) cout << "LI: " << L << endl;
-	//if (MODE == DEBUG) cout << "RI: " << R << endl;
 	vector<Bitset> Lkeys;
 	vector<Bitset> Rkeys;
 	Lkeys.push_back(L);
 	Rkeys.push_back(R);
 	//Generacion de las 16 subclaves
 	for (int i = 0; i < 16; i++) {
-		Lkeys.push_back(Lkeys[i]);
+		/*Lkeys.push_back(Lkeys[i]);
 		Rkeys.push_back(Rkeys[i]);
 		//Rotaciones
 		Lkeys[i+1].rotate(Rotations[i]);
 		Rkeys[i+1].rotate(Rotations[i]);
-		//if (MODE == DEBUG) cout << "L" << i <<": " << Lkeys[i+1] << endl;
-		//if (MODE == DEBUG) cout << "R" << i <<": " << Rkeys[i+1] << endl;
 		//Intorducir la clave en el vector de claves y hacer PC2
-		_keys.push_back(PPC2(Bitset(Lkeys[i+1].to_s() + Rkeys[i+1].to_s())));
+		_keys.push_back(PPC2(Bitset(Lkeys[i+1].to_s() + Rkeys[i+1].to_s())));*/
+		L.rotate(Rotations[i]);
+		R.rotate(Rotations[i]);
+		_keys.push_back(PPC2(Bitset(L.to_s() + R.to_s())));
 		if (MODE != STD) cout << "Subclave " << i << ":\t" <<_keys[i].to_s(BIN,8) << endl;
 	}
 	if (MODE != STD) cout << "\n\t***************************\n\n";

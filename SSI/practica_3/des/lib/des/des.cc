@@ -119,27 +119,26 @@ void Des::code(string msg, const char MODE) {
 	Bitset pip = PIP(_msg);
 	if (MODE != STD) cout << "\nPermutacion inicial: " << PIP(_msg).to_s(BIN,8) << "\n\n";
 	//Dividir en dos mitades
-	vector<Bitset> lmsg;
-	lmsg.push_back(pip.subset(32,32));
-	vector<Bitset> rmsg;
-	rmsg.push_back(pip.subset(0,32));
-	//cout << "LM: " << lmsg[0] << endl;
-	//cout << "RM: " << rmsg[0] << endl;
+	//vector<Bitset> lmsg;
+	Bitset lmsg = pip.subset(32,32);
+	//lmsg.push_back(pip.subset(32,32));
+	//vector<Bitset> rmsg;
+	Bitset rmsg = pip.subset(0,32);
+	//rmsg.push_back(pip.subset(0,32));
 	//Se comienza la cifrar. 16 iteraciones
 	for (int i = 0; i < 16; i++) {
-		lmsg.push_back(rmsg[i]);
-		//cout << "K" << i << ": " << (*_keys)[i] << endl;
+		/*lmsg.push_back(rmsg[i]);
 		Bitset ssbox = (*_sbox).run(rmsg[i],(*_keys)[i], MODE);
-		//cout << "*************************" << endl;
 		if (MODE != STD) cout << "Salida Feistel " << i << ":\t" << ssbox.to_s(BIN,8) << endl;
-		rmsg.push_back(ssbox^(lmsg[i]));
-		//cout << "L" << i << ": " << lmsg[i+1] << endl;
-		//cout << "R" << i << ": " << rmsg[i+1] << endl;
-		//cout << "************************" << endl;
-		//cin.get();
+		rmsg.push_back(ssbox^(lmsg[i]));*/
+		Bitset ssbox = (*_sbox).run(rmsg,(*_keys)[i], MODE);
+		Bitset aux = rmsg;
+		rmsg = ssbox^lmsg;
+		lmsg = aux;
 	}
 	//Una vez se tiene L16 y R16 hay que unirlos y aplicar IP
-	Bitset lrjoint = Bitset(rmsg[16].to_s() + lmsg[16].to_s());
+	//Bitset lrjoint = Bitset(rmsg[16].to_s() + lmsg[16].to_s());
+	Bitset lrjoint = Bitset(rmsg.to_s() + lmsg.to_s());
 	if (MODE != STD) cout << "\nUltima ronda: " << lrjoint.to_s(BIN,8) << endl;
 	_msg = PFP(lrjoint);
 	if (MODE != STD) cout << "\nMensaje cifrado: " <<_msg.to_s(BIN,8) << endl;
